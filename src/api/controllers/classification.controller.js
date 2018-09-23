@@ -2,9 +2,7 @@
 import Classification from '../models/classification.model';
 import Canvas from 'canvas';
 import sizeOf from 'image-size';
-import getPixels from 'get-pixels';
 import { readFile } from '../utils/filesystem';
-import fs from 'fs';
 
 exports.hello = (req, res) => {
   res.status(200)
