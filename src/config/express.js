@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import routes from '../api/routes/v1';
+import fetch from 'node-fetch';
 
 // App settings.
 const app = express()
@@ -12,5 +13,5 @@ const app = express()
   }))
   .use('/v1', routes)
   .use('/static', express.static('public'))
-  
+
 module.exports = app;
