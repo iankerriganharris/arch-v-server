@@ -1,8 +1,9 @@
 import express from 'express';
 import controller from '../../controllers/classification.controller';
 import multer from 'multer';
-const upload = multer({ dest: 'tmp/' })
+import { tmp } from '../../../config/multer';
 
+const upload = multer(tmp)
 
 const router = express.Router()
 
