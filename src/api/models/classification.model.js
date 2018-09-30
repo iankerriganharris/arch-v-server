@@ -1,8 +1,7 @@
-import fetch from 'node-fetch';
-global.fetch = fetch;
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-node';
 import { readFile } from '../utils/filesystem';
+
 
 class Classification {
   constructor() {
@@ -14,13 +13,18 @@ class Classification {
     this.modelUrl = 'https://s3-us-west-2.amazonaws.com/arch-v/public/tfjs-models/mobilenet_v2_classification/tensorflowjs_model.pb';
     this.weightsUrl = 'https://s3-us-west-2.amazonaws.com/arch-v/public/tfjs-models/mobilenet_v2_classification/weights_manifest.json';
     this.labelsUrl = 'https://s3-us-west-2.amazonaws.com/arch-v/public/etc/style_labels.txt';
+    this.modelPath = `file://${__dirname}/../../../public/tfjs-models/mobilenet_v2/tensorflowjs_model.pb`;
+    this.weightsPath = `file://${__dirname}/../../../public/tfjs-models/mobilenet_v2/weights_manifest.json`;
+    this.labelsPath = `file://${__dirname}/../../../public/etc/style_labels.txt`;
   }
 
   load = async () => {
-    this.model = await tf.loadFrozenModel(this.modelUrl, this.weightsUrl);
-    // const labelsBuffer = await readFile(this.labelsUrl);
-    const labelsBuffer = fetch('https://s3-us-west-2.amazonaws.com/arch-v/public/etc/style_labels.txt');
-    this.labels = labelsBuffer.toString().split('\n');
+    try {
+      this.model = await tf.loadFrozenModel(this.modelPath, this.weightsPath);
+      this.labels = await readFile(new URL(this.labelsPath)).toString().split('\n');
+    } catch(err) {
+      console.log(err)
+    }
   }
 
    prepImage = async (img) => {

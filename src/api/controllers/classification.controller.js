@@ -1,5 +1,5 @@
 import Classification from '../models/classification.model';
-import Canvas from 'canvas-prebuilt';
+import Canvas from 'canvas';
 import sizeOf from 'image-size';
 import { readFile } from '../utils/filesystem';
 
