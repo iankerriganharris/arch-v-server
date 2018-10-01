@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "arch-v-server-executor",
+    "name": "arch-v-server",
+    "region": "us-west-2"
+  },
+  "api": {
+    "id": "39qx1e61h6"
+  }
+}
